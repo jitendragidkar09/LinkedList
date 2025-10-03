@@ -1,5 +1,8 @@
 package org.example.singlylinkedlist;
 
+import java.util.Iterator;
+import java.util.LinkedList;
+
 public class Main {
     public static void main(String[] args) {
         SinglyLinkedList sll = new SinglyLinkedList();
@@ -29,6 +32,13 @@ public class Main {
         sll.insertAtIndex(10, 50);
 
         System.out.println("After inserting 50 at index 10 (append):");
+        sll.printList();
+
+        int middle = sll.findMiddle();
+        System.out.println("Middle Element : "+middle);
+
+        //Printing reverse linkedlist
+        sll.reverse();
         sll.printList();
     }
 }

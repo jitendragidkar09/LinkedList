@@ -52,4 +52,104 @@ public class SinglyLinkedList {
         }
         System.out.println("null");
     }
+
+    //To find middle element of a singly linkedlist in a single pass
+    public int findMiddle(){
+        if(head==null){
+            throw new IllegalStateException("List is Empty !");
+        }
+        Node slow=head;
+        Node fast=head;
+
+        //Move fast by two and slow by one
+        while(fast!=null && fast.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+        }
+        return slow.data;
+    }
+
+    //Method to delete a Node
+    //Delete at Beginning
+    public void deleteAtBeginning(){
+        if(head==null){
+            System.out.println("List is Empty !");
+            return;
+        }
+        head=head.next; //First node ko skip karke head ko next par le jao
+    }
+
+    //Delete at End
+    public void deleteAtEnd(){
+        if(head==null){
+            System.out.println("List is Empty !");
+            return;
+        }
+        if(head.next==null){ //sirf ek node hai
+            head=null;
+            return;
+        }
+        Node temp=head;
+        while(temp.next.next!=null){ //second last tak jao
+            temp=temp.next;
+        }
+        temp.next=null; //Last node hata do
+    }
+
+    //Delete at specified position
+    public void deleteAtPosition(int index){
+        if(head==null || index<0){
+            System.out.println("List is empty or Index is invalid ");
+            return;
+        }
+        if(index==0){
+            deleteAtBeginning();
+            return;
+        }
+        Node temp=head;
+        for (int i = 0; temp!=null && i<index-1; i++) {
+            temp=temp.next;
+        }
+        if(temp==null || temp.next==null){
+            System.out.println("Index out of Range.");
+            return;
+        }
+        temp.next=temp.next.next; //Node skip kardo
+    }
+
+    //Delete By Value
+    public void deleteByValue(int value){
+        if(head==null){
+            System.out.println("List is empty.");
+            return;
+        }
+        if(head.data==value){ //Agar head hi delete karna hai
+            head=head.next;
+            return;
+        }
+        Node temp=head;
+        while(temp.next!=null && temp.next.data!=value){
+            temp=temp.next;
+        }
+        if(temp.next==null){
+            System.out.println("Value not found.");
+            return;
+        }
+        temp.next=temp.next.next;  //Node skip kardo
+    }
+
+    //Reverse a linkedlist
+    public void reverse(){
+        Node prev=null;  //initially null
+        Node curr=head; //start from head
+        Node next; //to store next node
+
+        while(curr != null){
+            next=curr.next; //store next
+            curr.next=prev; //reverse link
+            prev=curr; //move prev ahead
+            curr=next; //move curr ahead
+        }
+        head=prev;  //finally prev is the new head
+    }
 }

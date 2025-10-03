@@ -118,4 +118,23 @@ public class DoublyLinkedList {
         }
         System.out.println("null");
     }
+
+    // Reverse doubly linked list
+    public void reverse() {
+        Node curr = head;
+        Node temp = null;
+
+        // Swap next and prev for each node
+        while (curr != null) {
+            temp = curr.prev;       // store previous
+            curr.prev = curr.next;  // swap prev and next
+            curr.next = temp;       // assign old prev to next
+            curr = curr.prev;       // move to next node (jo actually prev tha)
+        }
+
+        // After loop, temp is at new head ka previous
+        if (temp != null) {
+            head = temp.prev; // new head
+        }
+    }
 }
